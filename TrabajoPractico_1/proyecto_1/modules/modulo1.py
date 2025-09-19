@@ -13,6 +13,15 @@ class ListaDoblementeEnlazada:
         self._tail = None #Ultimo nodo --> La cola
         self._size = 0 #Cantidad de elementos en la lista --> La creo vacia, la consigna dice que el Init tiene que crear una lista vacia.
 
+    def __str__(self):
+        # sirve para poder mostrar el contenido de una LDE por consola con la función print
+        elementos = []
+        actual = self._head
+        while actual is not None:
+            elementos.append(str(actual.item))
+            actual = actual.next
+        return " <-> ".join(elementos)
+
     def esta_vacia(self):
         """Devuelve True si la lista está vacía"""
         return self._size == 0
@@ -42,31 +51,6 @@ class ListaDoblementeEnlazada:
             self._tail = nuevo
         self._size += 1
 
-   # def insertar(self, item, posicion: int):
-        #"""Entonces, le paso el item, y despues le voy pasando la posición"""
-       # if posicion < 0 or posicion > self._size:
-            #raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
-        
-#Directamente uso para los dos casos que quiera insertar un item a la lista tanto al final como al principio, las dos funciones que hice anteriormente
-       # if posicion==0:
-            #self.agregar_al_inicio(item)
-           # return
-        
-        #if posicion==self._size:
-            #self.agregar_al_final(item)
-           # return
-        
-#Ahora si, en las posiciones intermedias:
-        #actual = self._head #Empiezo a recorrer la lista desde el primer nodo
-        #for i in range(posicion): #acá recorro la lista hasta la posicion que quiero
-            #actual=actual.next #actual se va igualando al nodo que va recorriendo por iteración, cuando termina de recorrer se guarda la posicion
-        
-        #nuevo=Nodo(item, prev=actual.prev, next=actual)
-
-       # actual.prev.next = nuevo
-       # actual.prev = nuevo
-
-        #self._size +=1
     def insertar(self, item, posicion: int):
         if posicion < 0 or posicion > self._size:
             raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
@@ -161,7 +145,17 @@ class ListaDoblementeEnlazada:
                 copia._head.prev = self._tail
                 self._tail = copia._tail
             self._size += len(copia)
-        
+        return self
+    
+
+        def __len__(self, lista):
+            contador = 0
+            for i in lista:
+                while lista._head is not None:
+                    contador += 1
+                if lista._head == None:
+                    break
+        return contador
 
 
         

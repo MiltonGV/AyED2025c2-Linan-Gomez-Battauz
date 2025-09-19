@@ -1,4 +1,5 @@
 from modules.modulo1 import ListaDoblementeEnlazada
+from modules.modulo1 import ListaDoblementeEnlazada.__len__
 
 #lista = ListaDoblementeEnlazada()
 #print("¿Está vacía?", lista.esta_vacia())
@@ -31,4 +32,11 @@ print("La cola:",lista._tail.item)
 
 #Pruebo la función insertar
 lista.insertar(4,0)
-print(lista._head)
+
+lista2 = ListaDoblementeEnlazada()
+lista2.agregar_al_inicio(2)
+lista2.agregar_al_final(4)
+lista2.agregar_al_inicio(1)
+lista2.agregar_al_inicio(5)
+print(lista2)
+print(lista)
