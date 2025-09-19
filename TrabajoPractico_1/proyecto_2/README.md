@@ -1,14 +1,18 @@
-# 🐍Nombre del proyecto (darle un nombre significativo) 
+# 🐍 Guerra&Cartas 
 
 Breve descripción del proyecto:
 
-Ejemplo: “Este es un script en el que se comparan algoritmos de ordenamiento. Permite [describir funcionalidades principales].
+Este es un script en que se realiza el uso del Juego Guerra, el cual consiste de usar las cartas como objetos en un mazo el cual se comporta como lugar de almacenamiento de estos, para asi poder realizar las actividades necesarias para que funcione el juego principal de guerra.
 
 ---
 ## 🏗Arquitectura General
 
-Explica brevemente cómo está organizado el código (funciones y/o clases)
+El codigo se organiza en:
 
+Clases:
+   Carta: esta consiste en una estructura que posee 2 valores caracteristicos, el palo al cual se corresponde, y el valor que va desde 1 hasta 9 y A, J, K,Q, esta clase carta puede ser llamada y manipulada con las funciones correspondientes.
+   Mazo: sirve como reservorio de las cartas y funciona siendo el lugar de inicio de donde una carta es utilizada en el juego, esto se realiza a traves de la funcion LDE de trabajos anteriores, dando el manejo del flujo de cartas
+   Juego_Guerra:  
 Las gráficas de los resultados están disponible en la carpeta [data](./data) del proyecto.
 
 El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
