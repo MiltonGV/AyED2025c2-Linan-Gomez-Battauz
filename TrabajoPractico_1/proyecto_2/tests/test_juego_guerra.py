@@ -6,11 +6,11 @@ Created on Sun Aug 21 11:23:53 2022
 """
 
 
-from modulos.juegoGuerra import JuegoGuerra
+from modulos.juego_guerra import juego_guerra
 import unittest
 
 
-class TestJuegoGuerra(unittest.TestCase):
+class Testjuego_guerra(unittest.TestCase):
     
     def test_resulta_gana_jugador1(self):
         """
@@ -19,11 +19,11 @@ class TestJuegoGuerra(unittest.TestCase):
         """
 
         # jugador 1 gana la partida en el turno 137
-        self.juego_1 = JuegoGuerra(random_seed=314)
+        self.juego_1 = juego_guerra(random_seed=314)
         # jugador 1 gana la partida en el turno 638
-        self.juego_2 = JuegoGuerra(random_seed=59)
+        self.juego_2 = juego_guerra(random_seed=59)
         # jugador 1 gana la partida en el turno 1383
-        self.juego_3 = JuegoGuerra(random_seed=883)
+        self.juego_3 = juego_guerra(random_seed=883)
 
         self.juego_1.iniciar_juego(ver_partida=False)
         self.juego_2.iniciar_juego(ver_partida=False)
@@ -46,11 +46,11 @@ class TestJuegoGuerra(unittest.TestCase):
         """
 
         # jugador 2 gana la partida en el turno 145
-        self.juego_4 = JuegoGuerra(random_seed=167)
+        self.juego_4 = juego_guerra(random_seed=167)
         # jugador 2 gana la partida en el turno 1112
-        self.juego_5 = JuegoGuerra(random_seed=190)
+        self.juego_5 = juego_guerra(random_seed=190)
         # jugador 2 gana la partida en el turno 1373 por Guerra
-        self.juego_6 = JuegoGuerra(random_seed=735)
+        self.juego_6 = juego_guerra(random_seed=735)
 
         self.juego_4.iniciar_juego(ver_partida=False)
         self.juego_5.iniciar_juego(ver_partida=False)
@@ -71,8 +71,8 @@ class TestJuegoGuerra(unittest.TestCase):
         """
 
         # juego empate
-        self.juego_7 = JuegoGuerra(random_seed=547)
-        self.juego_8 = JuegoGuerra(random_seed=296)
+        self.juego_7 = juego_guerra(random_seed=547)
+        self.juego_8 = juego_guerra(random_seed=296)
 
         self.juego_7.iniciar_juego(ver_partida=False)
         self.juego_8.iniciar_juego(ver_partida=False)
