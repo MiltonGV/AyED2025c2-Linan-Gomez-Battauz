@@ -3,7 +3,7 @@
 
 class Nodo:
     def __init__(self, item, prev=None, next=None):
-        self.item = item #Dato que guarda el nodo.
+        self.item = item #Dato que guardo dentro del nodo.
         self.prev = prev #Referencia al nodo anterior.
         self.next = next #Referencia al nodo siguiente.
 
@@ -11,7 +11,7 @@ class ListaDoblementeEnlazada:
     def __init__(self):
         self._head = None #Primer nodo --> La cabeza
         self._tail = None #Ultimo nodo --> La cola
-        self._size = 0 #Cantidad de elementos en la lista --> La creo vacia (?)
+        self._size = 0 #Cantidad de elementos en la lista --> La creo vacia, la consigna dice que el Init tiene que crear una lista vacia.
 
     def esta_vacia(self):
         """Devuelve True si la lista está vacía"""
@@ -42,61 +42,86 @@ class ListaDoblementeEnlazada:
             self._tail = nuevo
         self._size += 1
 
-    def insertar(self, item, position):
-        if position < 0:
-            raise ValueError("La posición no puede ser negativa")
+    def insertar(self, item, posicion: int):
+        """Entonces, le paso el item, y despues le voy pasando la posición"""
+        if posicion < 0 or posicion > self._size:
+            raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
         
-        # Caso: lista vacía o posición 0
-        if self._head is None or position == 0:
-            nuevo = Nodo(item)
-            nuevo.next = self._head
-            
-            if self._head is not None:
-                self._head.prev = nuevo
-            
-            self._head = nuevo
-            
-            if self.tail is None:
-                self.tail = nuevo
-            
-            self.size += 1
+#Directamente uso para los dos casos que quiera insertar un item a la lista tanto al final como al principio, las dos funciones que hice anteriormente
+        if posicion==0:
+            self.agregar_al_inicio(item)
             return
         
-        # Caso: posición mayor o igual al tamaño (insertar al final)
-        if position >= self._size:
-            nuevo = Nodo(item)
-            nuevo.prev = self.tail
-            
-            if self.tail is not None:
-                self.tail.next = nuevo
-            
-            self.tail = nuevo
-            
-            # Si solo había un elemento
-            if self._head is None:
-                self._head = nuevo
-            
-            self.size += 1
+        if posicion==self._size:
+            self.agregar_al_final(item)
             return
         
-        # Caso: inserción en posición intermedia
-        actual = self._head
-        contador = 0
+#Ahora si, en las posiciones intermedias:
+        actual = self._head #Empiezo a recorrer la lista desde el primer nodo
+        for i in range(posicion): #acá recorro la lista hasta la posicion que quiero
+            actual=actual.next #actual se va igualando al nodo que va recorriendo por iteración, cuando termina de recorrer se guarda la posicion
         
-        # Recorrer hasta la posición deseada
-        while actual is not None and contador < position:
-            actual = actual.next
-            contador += 1
-        
-        # Crear nuevo nodo
-        nuevo = Nodo(item)
-        nuevo.prev = actual.prev
-        nuevo.next = actual
-        
-        # Reenlazar nodos adyacentes
-        if actual.prev is not None:
-            actual.prev.next = nuevo
-        
+        nuevo=Nodo(item, prev=actual.prev, next=actual)
+
+        actual.prev.next = nuevo
         actual.prev = nuevo
+
+        self._size +=1
+
+        def extraer(self, posicion=None):
+            
+            if self._head is None:
+                raise Exception("La lista está vacía")
+            
+            if posicion is None:
+                posicion=self._size -1
+            
+            if posicion < 0 or posicion >= self._size:
+                raise IndexError("Posición invalida")
+
+            if posicion == 0:
+                valor = self._head.item
+                self._head = self._head.next
+                if self._head:
+                    self._head.prev = None
+                else:
+                    self._tail = None #lista quedó vacía
+                self._size -= 1
+                return valor
+
+        def copiar(self):
+            lista_nueva = ListaDoblementeEnlazada()
+            actual = self._head
+
+            while actual is not None:
+                if lista_nueva.esta_vacia()
+                    nodo_nuevo = Nodo(actual.item)
+                    lista_nueva._head = nodo_nuevo
+                    lista_nueva._tail = nodo_nuevo
+                else:
+                    nodo_nuevo = Nodo(actual.item, prev= lista_nueva._tail)
+                    lista_nueva._tail.next = nodo_nuevo
+                    lista_nueva._tail = nodo_nuevo
+
+                lista_nueva._size += 1
+                actual = actual.next
+            
+            return lista_nueva
         
-        self.size += 1
+        def invertir(self):
+        #Empezamos desde la cabeza de la lista
+            actual = self._head
+            #Recorremos todos los nodos hasta que no haya más
+            while actual is not None:
+                #Intercambiamos punteros prev y next de este nodo
+                actual.prev, actual.next = actual.next, actual.prev
+                #Avanzamos al siguiente nodo, que después del intercambio quedó en prev
+                actual = actual.prev
+        #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
+        self._head, self._tail = self._tail, self._head
+        #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
+        return self
+
+        
+
+        
