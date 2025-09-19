@@ -29,5 +29,6 @@ print("Tamaño:",lista._size)
 print("La cabeza:",lista._head.item)
 print("La cola:",lista._tail.item)
 
-lista.insertar(5,2)
-print("Tamaño:",lista._size)
+#Pruebo la función insertar
+lista.insertar(4,0)
+print(lista._head)

@@ -42,31 +42,60 @@ class ListaDoblementeEnlazada:
             self._tail = nuevo
         self._size += 1
 
-    def insertar(self, item, posicion: int):
-        """Entonces, le paso el item, y despues le voy pasando la posición"""
-        if posicion < 0 or posicion > self._size:
-            raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
+   # def insertar(self, item, posicion: int):
+        #"""Entonces, le paso el item, y despues le voy pasando la posición"""
+       # if posicion < 0 or posicion > self._size:
+            #raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
         
 #Directamente uso para los dos casos que quiera insertar un item a la lista tanto al final como al principio, las dos funciones que hice anteriormente
-        if posicion==0:
-            self.agregar_al_inicio(item)
-            return
+       # if posicion==0:
+            #self.agregar_al_inicio(item)
+           # return
         
-        if posicion==self._size:
-            self.agregar_al_final(item)
-            return
+        #if posicion==self._size:
+            #self.agregar_al_final(item)
+           # return
         
 #Ahora si, en las posiciones intermedias:
-        actual = self._head #Empiezo a recorrer la lista desde el primer nodo
-        for i in range(posicion): #acá recorro la lista hasta la posicion que quiero
-            actual=actual.next #actual se va igualando al nodo que va recorriendo por iteración, cuando termina de recorrer se guarda la posicion
+        #actual = self._head #Empiezo a recorrer la lista desde el primer nodo
+        #for i in range(posicion): #acá recorro la lista hasta la posicion que quiero
+            #actual=actual.next #actual se va igualando al nodo que va recorriendo por iteración, cuando termina de recorrer se guarda la posicion
         
-        nuevo=Nodo(item, prev=actual.prev, next=actual)
+        #nuevo=Nodo(item, prev=actual.prev, next=actual)
 
-        actual.prev.next = nuevo
-        actual.prev = nuevo
+       # actual.prev.next = nuevo
+       # actual.prev = nuevo
 
-        self._size +=1
+        #self._size +=1
+    def insertar(self, item, posicion: int):
+        if posicion < 0 or posicion > self._size:
+            raise IndexError("La posición ingresada no es válida, se encuentra fuera de rango")
+
+        if posicion == 0:
+            self.agregar_al_inicio(item)
+            return
+
+        if posicion == self._size:
+            self.agregar_al_final(item)
+            return
+
+        # Posiciones intermedias
+        actual = self._head
+        for _ in range(posicion):
+            actual = actual.next
+
+    # Si actual.prev es None significa que estamos insertando en la cabeza
+        if actual.prev is None:
+            nuevo = Nodo(item, next=actual)
+            actual.prev = nuevo
+            self._head = nuevo
+        else:
+            nuevo = Nodo(item, prev=actual.prev, next=actual)
+            actual.prev.next = nuevo
+            actual.prev = nuevo
+
+        self._size += 1
+
 
         def extraer(self, posicion=None):
             
@@ -94,7 +123,7 @@ class ListaDoblementeEnlazada:
             actual = self._head
 
             while actual is not None:
-                if lista_nueva.esta_vacia()
+                if lista_nueva.esta_vacia():
                     nodo_nuevo = Nodo(actual.item)
                     lista_nueva._head = nodo_nuevo
                     lista_nueva._tail = nodo_nuevo
@@ -121,6 +150,19 @@ class ListaDoblementeEnlazada:
         self._head, self._tail = self._tail, self._head
         #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
         return self
+
+        def concatenar(self, lista):
+            copia=lista.copiar()
+            if not self._head:
+                self._head = copia._head   
+                self._tail = copia._tail
+            elif copia._head:
+                self._tail.next = copia._head
+                copia._head.prev = self._tail
+                self._tail = copia._tail
+            self._size += len(copia)
+        
+
 
         
 
