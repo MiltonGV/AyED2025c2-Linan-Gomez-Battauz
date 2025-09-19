@@ -1,6 +1,6 @@
 # 🐍Nombre del proyecto (darle un nombre significativo) 
 
-Breve descripción del proyecto:
+Breve descripción del proyecto: 
 
 Ejemplo: “Este es un script en el que se comparan algoritmos de ordenamiento. Permite [describir funcionalidades principales].
 
@@ -36,8 +36,9 @@ El informe completo está disponible en la carpeta [docs](./docs) del proyecto.
 ---
 ## 🙎‍♀️🙎‍♂️Autores
 
-- Apellido y Nombre del primer integrante
-- Apellido y Nombre del primer integrante
+- Battauz Pedro
+- Gomez Villon Milton
+- Liñan Juan Manuel
 
 ---
 
