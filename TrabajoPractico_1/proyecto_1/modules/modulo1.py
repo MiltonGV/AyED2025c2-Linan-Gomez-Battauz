@@ -42,13 +42,61 @@ class ListaDoblementeEnlazada:
             self._tail = nuevo
         self._size += 1
 
-    def insertar (self, item, posicion):
-        nuevo = Nodo(item, ListaDoblementeEnlazada[posicion])
+    def insertar(self, item, position):
+        if position < 0:
+            raise ValueError("La posición no puede ser negativa")
         
+        # Caso: lista vacía o posición 0
+        if self._head is None or position == 0:
+            nuevo = Nodo(item)
+            nuevo.next = self._head
+            
+            if self._head is not None:
+                self._head.prev = nuevo
+            
+            self._head = nuevo
+            
+            if self.tail is None:
+                self.tail = nuevo
+            
+            self.size += 1
+            return
         
-        if posicion == None:
-            nuevo = Nodo(item, prev=self._tail, next=None)
-
-        self._size += 1
-
-#Bien, una vez que agregué el metodo "esta_vacia" ahora voy con el metodo para agregar al inicio de la lista un item.
+        # Caso: posición mayor o igual al tamaño (insertar al final)
+        if position >= self._size:
+            nuevo = Nodo(item)
+            nuevo.prev = self.tail
+            
+            if self.tail is not None:
+                self.tail.next = nuevo
+            
+            self.tail = nuevo
+            
+            # Si solo había un elemento
+            if self._head is None:
+                self._head = nuevo
+            
+            self.size += 1
+            return
+        
+        # Caso: inserción en posición intermedia
+        actual = self._head
+        contador = 0
+        
+        # Recorrer hasta la posición deseada
+        while actual is not None and contador < position:
+            actual = actual.next
+            contador += 1
+        
+        # Crear nuevo nodo
+        nuevo = Nodo(item)
+        nuevo.prev = actual.prev
+        nuevo.next = actual
+        
+        # Reenlazar nodos adyacentes
+        if actual.prev is not None:
+            actual.prev.next = nuevo
+        
+        actual.prev = nuevo
+        
+        self.size += 1
