@@ -12,5 +12,5 @@ def BubbleSort(lis):
     return lis
 
 lista_nueva = BubbleSort(lista)
-#print(lista_nueva)
+
 
