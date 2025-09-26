@@ -1,4 +1,4 @@
-from modules.modulo1 import ListaDoblementeEnlazada
+from modules.ListaDoblemmenteEnlazada import ListaDoblementeEnlazada
 #from modules.modulo1 import ListaDoblementeEnlazada.__len__
 
 #lista = ListaDoblementeEnlazada()
@@ -20,13 +20,13 @@ lista.agregar_al_inicio(20.4)
 #Deberia mostrar en Head el 20 y en Tail el 10.
 
 print("¿Está vacía?",lista.esta_vacia())
-print("Tamaño:",lista._size)
+print("Tamaño:",lista.__len__())
 print("La cabeza:",lista._head.item)
 print("La cola:",lista._tail.item)
 
 #De nuevo, corroboro que de verdad agrega el item al final.
 lista.agregar_al_final("hola")
-print("Tamaño:",lista._size)
+print("Tamaño:",lista.__len__())
 print("La cabeza:",lista._head.item)
 print("La cola:",lista._tail.item)
 
@@ -40,4 +40,4 @@ lista2.agregar_al_inicio(1)
 lista2.agregar_al_inicio(5)
 print(lista2)
 print(lista)
-print(lista.__len__)
+print(lista.__len__())
