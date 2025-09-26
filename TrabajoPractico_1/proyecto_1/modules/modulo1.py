@@ -156,6 +156,26 @@ class ListaDoblementeEnlazada:
                 if lista._head == None:
                     break
         return contador
+    
+    def __len__(self):
+    # Devuelve la cantidad de elementos de la lista
+    return self._size
+
+
+def __add__(self, otra_lista):
+    # Crea una nueva lista para no modificar las originales
+    nueva = self.copiar()          # usamos copiar() que ya hicimos
+    # Aprovechamos concatenar para unir las listas
+    nueva.concatenar(otra_lista)
+    return nueva
+
+
+def __iter__(self):
+    # Permite recorrer la lista con for elemento in lista:
+    actual = self._head
+    while actual is not None:
+        yield actual.item          # yield devuelve cada item y mantiene el estado
+        actual = actual.next
 
 
         
