@@ -59,7 +59,7 @@ class Carta:
     
     
 if __name__ == "__main__":
-    carta = Carta("♣", "3")
+    carta = Carta("3", "♣")
     print(carta)
     carta.visible = True
     print(carta)
