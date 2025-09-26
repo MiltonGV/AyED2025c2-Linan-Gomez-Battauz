@@ -1,5 +1,5 @@
 from modules.modulo1 import ListaDoblementeEnlazada
-from modules.modulo1 import ListaDoblementeEnlazada.__len__
+#from modules.modulo1 import ListaDoblementeEnlazada.__len__
 
 #lista = ListaDoblementeEnlazada()
 #print("¿Está vacía?", lista.esta_vacia())
@@ -40,3 +40,4 @@ lista2.agregar_al_inicio(1)
 lista2.agregar_al_inicio(5)
 print(lista2)
 print(lista)
+print(lista.__len__)

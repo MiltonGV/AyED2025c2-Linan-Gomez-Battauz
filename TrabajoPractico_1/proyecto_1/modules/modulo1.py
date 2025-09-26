@@ -81,80 +81,80 @@ class ListaDoblementeEnlazada:
         self._size += 1
 
 
-        def extraer(self, posicion=None):
-            
-            if self._head is None:
-                raise Exception("La lista está vacía")
-            
-            if posicion is None:
-                posicion=self._size -1
-            
-            if posicion < 0 or posicion >= self._size:
-                raise IndexError("Posición invalida")
-
-            if posicion == 0:
-                valor = self._head.item
-                self._head = self._head.next
-                if self._head:
-                    self._head.prev = None
-                else:
-                    self._tail = None #lista quedó vacía
-                self._size -= 1
-                return valor
-
-        def copiar(self):
-            lista_nueva = ListaDoblementeEnlazada()
-            actual = self._head
-
-            while actual is not None:
-                if lista_nueva.esta_vacia():
-                    nodo_nuevo = Nodo(actual.item)
-                    lista_nueva._head = nodo_nuevo
-                    lista_nueva._tail = nodo_nuevo
-                else:
-                    nodo_nuevo = Nodo(actual.item, prev= lista_nueva._tail)
-                    lista_nueva._tail.next = nodo_nuevo
-                    lista_nueva._tail = nodo_nuevo
-
-                lista_nueva._size += 1
-                actual = actual.next
-            
-            return lista_nueva
+    def extraer(self, posicion=None):
         
-        def invertir(self):
-        #Empezamos desde la cabeza de la lista
-            actual = self._head
-            #Recorremos todos los nodos hasta que no haya más
-            while actual is not None:
-                #Intercambiamos punteros prev y next de este nodo
-                actual.prev, actual.next = actual.next, actual.prev
-                #Avanzamos al siguiente nodo, que después del intercambio quedó en prev
-                actual = actual.prev
-        #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
-        self._head, self._tail = self._tail, self._head
-        #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
-        return self
+        if self._head is None:
+            raise Exception("La lista está vacía")
+        
+        if posicion is None:
+            posicion=self._size -1
+        
+        if posicion < 0 or posicion >= self._size:
+            raise IndexError("Posición invalida")
 
-        def concatenar(self, lista):
-            copia=lista.copiar()
-            if not self._head:
-                self._head = copia._head   
-                self._tail = copia._tail
-            elif copia._head:
-                self._tail.next = copia._head
-                copia._head.prev = self._tail
-                self._tail = copia._tail
-            self._size += len(copia)
-        return self
+        if posicion == 0:
+            valor = self._head.item
+            self._head = self._head.next
+            if self._head:
+                self._head.prev = None
+            else:
+                self._tail = None #lista quedó vacía
+            self._size -= 1
+            return valor
+
+    def copiar(self):
+        lista_nueva = ListaDoblementeEnlazada()
+        actual = self._head
+
+        while actual is not None:
+            if lista_nueva.esta_vacia():
+                nodo_nuevo = Nodo(actual.item)
+                lista_nueva._head = nodo_nuevo
+                lista_nueva._tail = nodo_nuevo
+            else:
+                nodo_nuevo = Nodo(actual.item, prev= lista_nueva._tail)
+                lista_nueva._tail.next = nodo_nuevo
+                lista_nueva._tail = nodo_nuevo
+
+            lista_nueva._size += 1
+            actual = actual.next
+        
+        return lista_nueva
     
+    def invertir(self):
+    #Empezamos desde la cabeza de la lista
+        actual = self._head
+        #Recorremos todos los nodos hasta que no haya más
+        while actual is not None:
+            #Intercambiamos punteros prev y next de este nodo
+            actual.prev, actual.next = actual.next, actual.prev
+            #Avanzamos al siguiente nodo, que después del intercambio quedó en prev
+            actual = actual.prev
+    #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
+        self._head, self._tail = self._tail, self._head
+    #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
+        return self
 
-        def __len__(self, lista):
-            contador = 0
-            for i in lista:
-                while lista._head is not None:
-                    contador += 1
-                if lista._head == None:
-                    break
+    def concatenar(self, lista):
+        copia=lista.copiar()
+        if not self._head:
+            self._head = copia._head   
+            self._tail = copia._tail
+        elif copia._head:
+            self._tail.next = copia._head
+            copia._head.prev = self._tail
+            self._tail = copia._tail
+        self._size += len(copia)
+        return self
+
+
+    def __len__(self, lista):
+        contador = 0
+        for i in lista:
+            while lista._head is not None:
+                contador += 1
+            if lista._head == None:
+                break
         return contador
     
     def __len__(self):
@@ -178,6 +178,6 @@ def __iter__(self):
         actual = actual.next
 
 
-        
+    
 
-        
+    
