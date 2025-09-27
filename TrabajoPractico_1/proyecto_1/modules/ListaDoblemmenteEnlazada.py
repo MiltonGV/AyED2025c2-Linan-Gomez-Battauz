@@ -1,5 +1,6 @@
 # módulo para organizar funciones o clases utilizadas en nuestro proyecto
 # Crear tantos módulos como sea necesario para organizar el código
+from random import randint
 
 class Nodo:
     def __init__(self, item, prev=None, next=None):
@@ -174,7 +175,6 @@ class ListaDoblementeEnlazada:
     def __len__(self):
         return self._size
     
-
 
     
 
