@@ -170,6 +170,7 @@ class ListaDobleEnlazada:
             copia.cabeza.anterior = self.cola
             self.cola = copia.cola
         self.tamanio += len(copia)
+        self.lista + copia
         return self
 
     def __len__(self):
