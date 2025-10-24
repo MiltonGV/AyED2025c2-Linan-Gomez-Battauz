@@ -1,10 +1,10 @@
 import unittest
-from modules.ListaDoblemmenteEnlazada import ListaDoblementeEnlazada
+from modules.ListaDobleEnlazada import ListaDobleEnlazada
 
-class TestListaDoblementeEnlazada(unittest.TestCase):
+class TestListaDobleEnlazada(unittest.TestCase):
 
     def setUp(self):
-        self.lista = ListaDoblementeEnlazada()
+        self.lista = ListaDobleEnlazada()
 
     def test_lista_vacia(self):
         self.assertTrue(self.lista.esta_vacia())
@@ -88,11 +88,11 @@ class TestListaDoblementeEnlazada(unittest.TestCase):
         self.assertEqual(str(self.lista), "1 <-> 2 <-> 3")
 
     def test_concatenar(self):
-        lista1 = ListaDoblementeEnlazada()
+        lista1 = ListaDobleEnlazada()
         lista1.agregar_al_final(1)
         lista1.agregar_al_final(2)
         
-        lista2 = ListaDoblementeEnlazada()
+        lista2 = ListaDobleEnlazada()
         lista2.agregar_al_final(3)
         lista2.agregar_al_final(4)
         

@@ -1,4 +1,4 @@
-from modules.ListaDoblemmenteEnlazada import ListaDoblementeEnlazada
+from modules.ListaDobleEnlazada import ListaDoblementeEnlazada
 import time
 import matplotlib.pyplot as plt
 from random import randint

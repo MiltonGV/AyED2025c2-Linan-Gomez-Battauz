@@ -34,15 +34,15 @@ class Mazo:
             carta.visible = True
         return carta
 
-    def sacar_carta_abajo(self, mostrar=False):
-        """Saca y devuelve la carta de la parte inferior del mazo."""
-        if len(self._cartas) == 0:
-            raise DequeEmptyError("No hay cartas en el mazo")
+    # def sacar_carta_abajo(self, mostrar=False):
+    #     """Saca y devuelve la carta de la parte inferior del mazo."""
+    #     if len(self._cartas) == 0:
+    #         raise DequeEmptyError("No hay cartas en el mazo")
 
-        carta = self._cartas.extraer(-1)  # extrae el último nodo
-        if mostrar:
-            carta.visible = True
-        return carta
+    #     carta = self._cartas.extraer(-1)  # extrae el último nodo
+    #     if mostrar:
+    #         carta.visible = True
+    #     return carta
     
     def __str__(self):
         """Representación legible del mazo."""
