@@ -1,0 +1,1 @@
+Se realizaron tests solamente de los modulos grafo y vertice, ya que los modulos cola_de_prioridad y lists son usados en ejercicios anteriores, y por lo tanto si ambos tests anteriores funcionan esos significa que no fue necesario testearlos en este proyecto_3
