@@ -51,6 +51,24 @@ class temperatura_db:
         if not temperaturas: #Si la lista está vacía
             return None
         
+        return max(temperaturas)
+    
+    def min_temp_rango(self,fecha1, fecha2):
+        fecha1_obj = self._formato_fecha(fecha1)
+        fecha2_obj = self._formato_fecha(fecha2)
+
+        #La fecha 1 debe ser mayor a la 2
+        if fecha1_obj > fecha2_obj:
+            print("Error en max_temp_rango: La fecha1 debe ser anterior o igual a la fecha 2")
+            return None
+
+        #Obtengo todas las temperatuas
+        
+        temperaturas = self.arbol_temperatura.obtener_rangos(fecha1_obj,fecha2_obj)
+
+        if not temperaturas: # Si la lista está vacía
+            return None 
+
         return min(temperaturas)
     
     def temp_extremos_rango(self,fecha1, fecha2):
