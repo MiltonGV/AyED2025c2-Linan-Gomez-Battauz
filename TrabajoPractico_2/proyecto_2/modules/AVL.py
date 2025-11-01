@@ -22,10 +22,13 @@ class nodoAVL: #Cada nodoAVL es un dato de temperatura y fecha en si
 class AVL:
     #Constructir
 
-    def __init__(self, nodo):
-        if not nodo:
-            return 0
-        
+    #def __init__(self, nodo):
+     #   if not nodo:
+      #      return 0
+    # Construir
+    def __init__(self, nodo=None):
+        self.raiz = nodo
+    
     #Devuelve altura
     def altura(self, nodo):
         if not nodo:
@@ -40,7 +43,7 @@ class AVL:
         if not nodo: #Si el nodo es none
             return #No hacemos nada y salimos
     #Si el nodo SI existe, entonces:
-    nodo.altura = 1 + max(self.altura(nodo.izquierda), self.altura(nodo.derecha))
+        nodo.altura = 1 + max(self.altura(nodo.izquierda), self.altura(nodo.derecha))
 
     def rot_derecha(self, z): #Z es el nodo de arriba del todo pre rotación
         y = z.izquierda #Nueva raiz
@@ -85,7 +88,7 @@ def buscar(self,fecha_obj:datetime.date):
 
 #Metodo privado de busqueda
 def _buscar_nodo(self, nodo_actual, fecha_obj):
-    if not nodo_actual or nodo_actual.fecha == fecha_obj
+    if not nodo_actual or nodo_actual.fecha == fecha_obj:
         return nodo_actual
     
     if fecha_obj < nodo_actual.fecha:
@@ -93,12 +96,9 @@ def _buscar_nodo(self, nodo_actual, fecha_obj):
     else: #fecha_obj > nodo_actual.fecha
         return self._buscar_nodo(nodo_actual.derecha, fecha_obj)
     
-#Metodo publico de insersion
-def insertar(self,fecha:datetime.date, temperatura:float):
-    self.raiz = self._insertar(self.raiz, fecha, temperatura)
 
 #Metodos del propio arbol, privado
-def _insertar(self, nodo_actual, fecha:datetime.date, temperatura:float):
+def __insertar(self, nodo_actual, fecha:datetime.date, temperatura:float):
 
     #Inseciones normales
     if not nodo_actual:
@@ -138,5 +138,10 @@ def _insertar(self, nodo_actual, fecha:datetime.date, temperatura:float):
         return self.rot_izquierda(nodo_actual)
 
     return nodo_actual
+
+#Metodo publico de insersion
+def insertar(self,fecha:datetime.date, temperatura:float):
+    self.raiz = self._insertar(self.raiz, fecha, temperatura)
+
 
 

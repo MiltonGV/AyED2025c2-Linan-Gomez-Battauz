@@ -76,7 +76,7 @@ print("\n --6. Borrando temperaturas --")
 fecha_a_borrar = (fecha_inicial + datetime.timedelta(days=7)).strftime("%d/%m/%Y")
 print(f"Intentando borrar temperatura de la fecha: {fecha_a_borrar}")
 resultado_borrado = db.borrar_temperatura(fecha_a_borrar)
-print(f"Resultado del borrado: {'Exitoso' if resultado_borrado else "Fallido o no encontrado"}")
+print(f"Resultado del borrado: {'Exitoso' if resultado_borrado else 'o no encontrado'}")
 
 temp_despues_borrar = db.devolver_temperatura(fecha_a_borrar)
 print(f"Verificacion: Temperatura para {fecha_a_borrar} despues del borrado: {temp_despues_borrar}°C" if temp_despues_borrar is not None else f"Verificacion: No se encontro temperatura para {fecha_a_borrar} (borrado correcto)")
@@ -86,7 +86,7 @@ print("\n --7. Cantidad de muestras despues del borrado: --")
 total_muestras_desp_borrado = db.cantidad_muestras()
 print(f"Cantidad total de muestras despues del borrado: {total_muestras_desp_borrado}")
 
-if total_muestras_antes_borrado - 1 == total_muestras_desp_borrado
+if total_muestras_antes_borrado - 1 == total_muestras_desp_borrado:
     print("Verificacion de cantidad de muestras: Correcto")
 else:
     print("Verificacion de cantidad de muestras: incorrecta")
