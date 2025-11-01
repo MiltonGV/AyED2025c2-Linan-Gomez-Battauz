@@ -16,7 +16,6 @@ class ListsBinario:
 
     def insertar(self,k):
       self.listsbase.append(k)
-
       self.tamanioActual = self.tamanioActual + 1
       self.infiltArriba(self.tamanioActual) 
 

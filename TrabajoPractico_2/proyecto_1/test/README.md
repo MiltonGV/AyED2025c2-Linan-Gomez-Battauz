@@ -1,0 +1,1 @@
+Esta carpeta contiene los tests para hacer funcionar las funciones dadas, como la clase paciente fue proporcionada por la catedra, simplemente hicimos unos cambios pero que no son necesarios el testeo porque corresponden a la utilizacion de los otros modulos.

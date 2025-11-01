@@ -21,4 +21,4 @@ class ColaDePrioridad:
         return len(self.lists)
 
     def __iter__(self):
-        return iter(item[2] for item in self.lists.listalists[1:self.lists.tamanoActual+1])
+        return iter(item[2] for item in self.lists.listsbase[1:self.lists.tamanioActual+1])
