@@ -16,7 +16,7 @@ class Test_LDE(unittest.TestCase):
         self.n_elementos = 200
         """ LDE vacía """
         self.lde_1 = ListaDobleEnlazada()
-
+    
         """ LDE con elementos repetidos con lista auxiliar"""
         self.lde_2 = ListaDobleEnlazada()
         self.lista_aux_2 = random.choices(range(-self.n_elementos // 2, self.n_elementos // 2), k=self.n_elementos)

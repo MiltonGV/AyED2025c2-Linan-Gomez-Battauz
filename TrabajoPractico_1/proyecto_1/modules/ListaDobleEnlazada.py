@@ -1,4 +1,3 @@
-# módulo para organizar funciones o clases utilizadas en nuestro proyecto
 # Crear tantos módulos como sea necesario para organizar el código
 from random import randint
 
@@ -69,18 +68,11 @@ class ListaDobleEnlazada:
         for _ in range(posicion):
             actual = actual.siguiente
 
-    # Si actual.anterior es None significa que estamos insertando en la cabeza
-        if actual.anterior is None:
-            nuevo = nodo(dato, siguiente=actual)
-            actual.anterior = nuevo
-            self.cabeza = nuevo
-        else:
-            nuevo = nodo(dato, anterior=actual.anterior, siguiente=actual)
-            actual.anterior.siguiente = nuevo
-            actual.anterior = nuevo
+        nuevo = nodo(dato, anterior=actual.anterior, siguiente=actual)
+        actual.anterior.siguiente = nuevo
+        actual.anterior = nuevo
 
         self.tamanio += 1
-
 
     def extraer(self, posicion=None):
         
@@ -88,7 +80,7 @@ class ListaDobleEnlazada:
             raise Exception("La lista está vacía")
         
         if posicion is None:
-            posicion=self.tamanio -1
+            posicion = self.tamanio - 1
         
         if posicion < 0 or posicion >= self.tamanio:
             raise IndexError("Posición invalida")
@@ -113,6 +105,7 @@ class ListaDobleEnlazada:
             self.tamanio -= 1
             return valor
 
+        # Buscar nodo en posición intermedia
         if posicion < self.tamanio // 2:
             actual = self.cabeza
             for _ in range(posicion):
@@ -124,30 +117,25 @@ class ListaDobleEnlazada:
         
         valor = actual.dato
         
+        # Reenlazar nodos adyacentes
         actual.anterior.siguiente = actual.siguiente
         actual.siguiente.anterior = actual.anterior
+
+        self.tamanio -= 1
+        return valor
 
     def copiar(self):
         lista_nueva = ListaDobleEnlazada()
         actual = self.cabeza
 
         while actual is not None:
-            if lista_nueva.esta_vacia():
-                nodo_nuevo = nodo(actual.dato)
-                lista_nueva.cabeza = nodo_nuevo
-                lista_nueva.cola = nodo_nuevo
-            else:
-                nodo_nuevo = nodo(actual.dato, anterior= lista_nueva.cola)
-                lista_nueva.cola.siguiente = nodo_nuevo
-                lista_nueva.cola = nodo_nuevo
-
-            lista_nueva.tamanio += 1
+            lista_nueva.agregar_al_final(actual.dato)
             actual = actual.siguiente
         
         return lista_nueva
     
     def invertir(self):
-    #Empezamos desde la cabeza de la lista
+        #Empezamos desde la cabeza de la lista
         actual = self.cabeza
         #Recorremos todos los nodos hasta que no haya más
         while actual is not None:
@@ -155,28 +143,34 @@ class ListaDobleEnlazada:
             actual.anterior, actual.siguiente = actual.siguiente, actual.anterior
             #Avanzamos al siguiente nodo, que después del intercambio quedó en anterior
             actual = actual.anterior
-    #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
+        #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
         self.cabeza, self.cola = self.cola, self.cabeza
-    #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
+        #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
         return self
 
     def concatenar(self, lista):
-        copia=lista.copiar()
-        if not self.cabeza:
-            self.cabeza = copia.cabeza   
+        copia = lista.copiar()
+        if self.esta_vacia():
+            self.cabeza = copia.cabeza
             self.cola = copia.cola
-        elif copia.cabeza:
+            self.tamanio = copia.tamanio
+        elif not copia.esta_vacia():
             self.cola.siguiente = copia.cabeza
             copia.cabeza.anterior = self.cola
             self.cola = copia.cola
-        self.tamanio += len(copia)
-        self.lista + copia
+            self.tamanio += copia.tamanio
         return self
 
     def __len__(self):
         return self.tamanio
-    
 
-    
+    def __add__(self, otra):
+        resultado = self.copiar()
+        resultado.concatenar(otra)
+        return resultado
 
-    
+    def __iter__(self):
+        actual = self.cabeza
+        while actual is not None:
+            yield actual.dato
+            actual = actual.siguiente
