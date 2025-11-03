@@ -5,7 +5,7 @@ Created on Thu Sep  1 14:00:21 2022
 """
 
 from modules.ListaDobleEnlazada import ListaDobleEnlazada
-import unittest
+import unittest 
 import random
 
 
@@ -16,7 +16,7 @@ class Test_LDE(unittest.TestCase):
         self.n_elementos = 200
         """ LDE vacía """
         self.lde_1 = ListaDobleEnlazada()
-    
+
         """ LDE con elementos repetidos con lista auxiliar"""
         self.lde_2 = ListaDobleEnlazada()
         self.lista_aux_2 = random.choices(range(-self.n_elementos // 2, self.n_elementos // 2), k=self.n_elementos)
@@ -405,7 +405,7 @@ class Test_LDE(unittest.TestCase):
             nodo_original = nodo_original.siguiente
             nodo_concat = nodo_concat.siguiente
 
-    def test_operador_add(self):
+    def test_operador_  (self):
         """
         Verifico que funcione la concatenacion de listas mediante
         el uso del operador +

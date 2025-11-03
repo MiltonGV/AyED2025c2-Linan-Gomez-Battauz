@@ -82,9 +82,13 @@ class ListaDobleEnlazada:
         if posicion is None:
             posicion = self.tamanio - 1
         
+        if posicion < 0:
+            # Manejo de índices negativos: -1 es el último, -2 el antepenúltimo, etc.
+            posicion = self.tamanio + posicion
+            
         if posicion < 0 or posicion >= self.tamanio:
             raise IndexError("Posición invalida")
-
+        
         if posicion == 0:
             valor = self.cabeza.dato
             self.cabeza = self.cabeza.siguiente
