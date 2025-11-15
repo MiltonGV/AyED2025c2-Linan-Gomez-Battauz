@@ -139,17 +139,12 @@ class ListaDobleEnlazada:
         return lista_nueva
     
     def invertir(self):
-        #Empezamos desde la cabeza de la lista
         actual = self.cabeza
         #Recorremos todos los nodos hasta que no haya más
         while actual is not None:
-            #Intercambiamos punteros anterior y siguiente de este nodo
             actual.anterior, actual.siguiente = actual.siguiente, actual.anterior
-            #Avanzamos al siguiente nodo, que después del intercambio quedó en anterior
             actual = actual.anterior
-        #Al terminar el recorrido, la cabeza y la cola deben intercambiarse
         self.cabeza, self.cola = self.cola, self.cabeza
-        #Devolvemos la lista invertida (útil si queremos encadenar llamadas)
         return self
 
     def concatenar(self, lista):
