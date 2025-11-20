@@ -1,7 +1,13 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from modules.temperatura_db import temperatura_db
 import datetime
 
-db = temperatura_db
+# ... resto del código ...
+
+db = temperatura_db()
 
 #Insertamos un dato
 fecha = "07/08/2002"

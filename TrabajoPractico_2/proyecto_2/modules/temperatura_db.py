@@ -36,92 +36,71 @@ class temperatura_db:
 
     
     def max_temp_rango(self, fecha1, fecha2):
-        fecha1_obj = self._formato_fecha(fecha1)
-        fecha2_obj = self._formato_fecha(fecha2)
-
-        #La fecha 1 debe ser mayor a la 2
-        if fecha1_obj > fecha2_obj:
-            print("Error en max_temp_rango: La fecha 1 debe ser anterior o igual a la fecha 2")
-            return None
+        # Convertir strings a objetos fecha
+        f1 = datetime.datetime.strptime(fecha1, "%d/%m/%Y").date()
+        f2 = datetime.datetime.strptime(fecha2, "%d/%m/%Y").date()
         
-        #Obtengo todas las temperaturas.
-
-        temperaturas = self.arbol_temperatura.obtener_rangos(fecha1_obj, fecha2_obj)
-
-        if not temperaturas: #Si la lista está vacía
-            return None
+        # Obtenemos la lista de NODOS 
+        lista_nodos = self.arbol_temperatura.obtener_rangos(f1, f2)
         
-        return max(temperaturas)
+        if not lista_nodos:
+            return None
+            
+        # CREAMOS UNA LISTA SOLO CON LOS NUMEROS 
+        lista_valores = [nodo.temperatura for nodo in lista_nodos]
+        
+        return max(lista_valores)
+
+    def min_temp_rango(self, fecha1, fecha2):
+        f1 = datetime.datetime.strptime(fecha1, "%d/%m/%Y").date()
+        f2 = datetime.datetime.strptime(fecha2, "%d/%m/%Y").date()
+        
+        lista_nodos = self.arbol_temperatura.obtener_rangos(f1, f2)
+        
+        if not lista_nodos:
+            return None
+            
+        # CREAMOS UNA LISTA SOLO CON LOS NUMEROS (FLOAT)
+        lista_valores = [nodo.temperatura for nodo in lista_nodos]
+        
+        return min(lista_valores)
+
+    def temp_extremos_rango(self, fecha1, fecha2):
+        f1 = datetime.datetime.strptime(fecha1, "%d/%m/%Y").date()
+        f2 = datetime.datetime.strptime(fecha2, "%d/%m/%Y").date()
+        
+        lista_nodos = self.arbol_temperatura.obtener_rangos(f1, f2)
+        
+        if not lista_nodos:
+            return None, None # Retornamos dos Nones
+            
+        lista_valores = [nodo.temperatura for nodo in lista_nodos]
+        
+        return min(lista_valores), max(lista_valores)
     
-    def min_temp_rango(self,fecha1, fecha2):
-        fecha1_obj = self._formato_fecha(fecha1)
-        fecha2_obj = self._formato_fecha(fecha2)
-
-        #La fecha 1 debe ser mayor a la 2
-        if fecha1_obj > fecha2_obj:
-            print("Error en max_temp_rango: La fecha1 debe ser anterior o igual a la fecha 2")
-            return None
-
-        #Obtengo todas las temperatuas
+    def borrar_temperatura(self, fecha: str):
+        fecha_obj = datetime.datetime.strptime(fecha, "%d/%m/%Y").date()
         
-        temperaturas = self.arbol_temperatura.obtener_rangos(fecha1_obj,fecha2_obj)
-
-        if not temperaturas: # Si la lista está vacía
-            return None 
-
-        return min(temperaturas)
-    
-    def temp_extremos_rango(self,fecha1, fecha2):
-        fecha1_obj = self._formato_fecha(fecha1)
-        fecha2_obj = self._formato_fecha(fecha2)
-
-        #La fecha 1 debe ser mayor a la 2
-        if fecha1_obj > fecha2_obj:
-            print("Error en max_temp_rango: La fecha 1 debe ser anterior o igual a la fecha 2")
-            return None
-        
-        #Obtengo todas las temperaturas
-
-        temperaturas = self.arbol_temperatura.obtener_rango(fecha1_obj, fecha2_obj)
-
-        if not temperaturas: #Si la lista está vacía
-            return None
-        
-        temperatura_minima = min(temperaturas)
-        temperatura_maxima = max(temperaturas)
-
-        return(temperatura_maxima,temperatura_minima)
-    
-    def borrar_temperatura(self,fecha):
-        fecha_obj = self._formato_fecha(fecha)
-
-        temperatura = self.arbol_temperatura-buscar(fecha_obj)
-
-        if temperatura is None:
-            print(False)
-
-
+        #Primero verificamos si existe el dato para saber si podemos borrarlo
+        if self.arbol_temperatura.buscar(fecha_obj) is None:
+            return False # No existe, devolvemos False
+            
+        # Si existe, llamamos al método eliminar del AVL
         self.arbol_temperatura.eliminar(fecha_obj)
-
+        
+        #Devolvemos True para indicar que el borrado fue exitoso
         return True
 
-    def devolver_temperatura(self, fecha1, fecha2):
-        fecha1_obj = self._formato_fecha(fecha1)
-        fecha2_obj = self._formato_fecha(fecha2)
-
-        if fecha1_obj > fecha2_obj:
-            print("Error en devolver_temperaturas: La fecha1 debe ser anterior o igual a la fecha2")
-            return None
+    def devolver_temperaturas(self, fecha1, fecha2):
+        f1 = datetime.datetime.strptime(fecha1, "%d/%m/%Y").date()
+        f2 = datetime.datetime.strptime(fecha2, "%d/%m/%Y").date()
         
-        datos_encontrados = self.arbol_temperatura.obtener_datos_en_rango_orden(fecha1_obj, fecha2_obj)
-        lista = []
-        for fecha, temperatura in datos_encontrados:
-            lista.append(f"{fecha.strftime('%d/%m/%Y'): {temperatura}}°C")
+        lista_nodos = self.arbol_temperatura.obtener_rangos(f1, f2)
+        
 
-        if not lista:
-            print(f"Información: No se encontraron temperaturas en el rango {fecha1} - {fecha2}.")
-
-        return lista
+        lista_formateada = [nodo.datos() for nodo in lista_nodos]
+        
+        return lista_formateada
     
     def cantidad_muestras(self):
         return self.arbol_temperatura.contar_nodos()

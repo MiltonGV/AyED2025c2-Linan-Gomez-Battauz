@@ -32,7 +32,7 @@ fecha_no_existente = "01/01/2000"
 temp1 = db.devolver_temperatura(fecha_test1)
 print(f"Temperatura para {fecha_test1}: {temp1}°C" if temp1 is not None else f"No se encontro temperatura para {fecha_test1}")
 
-temp2 = temperatura_db(fecha_test2)
+temp2 = db.devolver_temperatura(fecha_test2)
 print(f"Temperatura para {fecha_test2}: {temp2}°C" if temp2 is not None else f"No se encontro temperatura para {fecha_test2}")
 
 temp_no_existente = db.devolver_temperatura(fecha_no_existente)
@@ -52,7 +52,7 @@ print(f"Temperatura minima en rango [{rango_fecha_inicio} - {rango_fecha_fin}]: 
 
 min_ext, max_ext = db.temp_extremos_rango(rango_fecha_inicio, rango_fecha_fin)
 if min_ext is not None and max_ext is not None:
-    print(f"Extremos (min, max) en rango [{rango_fecha_inicio - rango_fecha_fin}]: {min_ext}°C, {max_ext}°C")
+    print(f"Extremos (min, max) en rango [{rango_fecha_inicio} - {rango_fecha_fin}]: {min_ext}°C, {max_ext}°C")
 
 else:
     print(f"No hay datos suficientes para extremos en el rango [{rango_fecha_inicio} - {rango_fecha_fin}].")
@@ -60,7 +60,7 @@ print("-" * 30)
 
 print("\n --4. Devolver listado de temperaturas en rango --")
 print(f"Temperaturas entre {rango_fecha_inicio} - {rango_fecha_fin} (ordenadas):")
-lista_temps1 = db.devolver_temperatura(rango_fecha_inicio, rango_fecha_fin)
+lista_temps1 = db.devolver_temperaturas(rango_fecha_inicio, rango_fecha_fin)
 if lista_temps1:
     for item in lista_temps1:
         print(item)
