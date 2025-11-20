@@ -104,3 +104,35 @@ class temperatura_db:
     
     def cantidad_muestras(self):
         return self.arbol_temperatura.contar_nodos()
+    
+    def cargar_muestras_desde_archivo(self, nombre_archivo):
+
+        try:
+            with open(nombre_archivo, "r") as archivo:
+                contador = 0
+                for linea in archivo:
+                    linea = linea.strip() # Eliminar espacios en blanco al inicio/final
+                    if not linea:
+                        continue # Saltar líneas vacías
+                    
+                    try:
+                        # Separamos por punto y coma ';' según tu archivo muestras.txt
+                        partes = linea.split(';') 
+                        if len(partes) != 2:
+                            continue # Si la línea no tiene 2 partes, la saltamos
+                        
+                        fecha_str = partes[0]
+                        temperatura = float(partes[1])
+                        
+                        # Usamos el método guardar que ya creaste
+                        self.guardar_temperatura(temperatura, fecha_str)
+                        contador += 1
+                        
+                    except ValueError:
+                        print(f"Error al procesar la línea: {linea}")
+                        continue
+                        
+            print(f"--> Carga exitosa: Se cargaron {contador} muestras desde '{nombre_archivo}'.")
+            
+        except FileNotFoundError:
+            print(f"Error: No se encontró el archivo '{nombre_archivo}'.")

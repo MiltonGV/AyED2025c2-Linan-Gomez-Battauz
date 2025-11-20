@@ -189,7 +189,7 @@ class AVL:
         if not nodo:
             return nodo
 
-        # 1. Búsqueda del nodo a eliminar (BST estándar)
+        # 1. Búsqueda del nodo a eliminar
         if fecha < nodo.fecha:
             nodo.izquierda = self._eliminar(nodo.izquierda, fecha)
         elif fecha > nodo.fecha:
